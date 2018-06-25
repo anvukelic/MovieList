@@ -9,13 +9,21 @@ import ada.osc.movielist.model.Movie;
  */
 public interface UpcomingMovieContract {
 
-    interface View{
+    interface View {
         void displayMovies(List<Movie> movieList);
+
+        void addMovies(List<Movie> movieList);
+
+        void refreshRecycler(List<Movie> movieList);
     }
 
-    interface Presenter{
+    interface Presenter {
         void setView(UpcomingMovieContract.View view);
 
         void getUpcomingMovies(int page);
+
+        void getUpcomingMoviesNextPage(int page);
+
+        void refreshUpcomingMovies();
     }
 }

@@ -29,10 +29,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     private ItemClickListener listener;
     private Context context;
 
-    public MovieAdapter(ItemClickListener listener, List<Movie> movieList, Context context) {
+    public MovieAdapter(ItemClickListener listener, List<Movie> movies, Context context) {
         this.listener = listener;
-        movies = movieList;
+        this.movies = movies;
         this.context = context;
+    }
+
+    public void refreshData(List<Movie> movieList){
+        movies.clear();
+        movies.addAll(movieList);
+        notifyDataSetChanged();
+    }
+
+    public void addMovies(List<Movie> movies){
+        this.movies.addAll(movies);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -57,6 +68,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     public Movie getMovie(int position){
         return movies.get(position);
+    }
+    public int getMovieId(int position){
+        return movies.get(position).getId();
     }
 
     @Override
@@ -86,10 +100,5 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
                 listener.onItemClick(view, getAdapterPosition());
             }
         }
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

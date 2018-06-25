@@ -16,7 +16,7 @@
         card_view:cardCornerRadius="4dp">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -25,14 +25,17 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="0dp"
-                android:src="@drawable/poster" />
+                android:src="@drawable/no_image" />
 
             <TextView
                 android:id="@+id/movie_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
+                android:ellipsize="end"
                 android:hint="title"
-                android:paddingStart="@dimen/between_element_margin"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/between_elements"
+                android:paddingStart="@dimen/between_elements"
                 android:textSize="@dimen/title_size"
                 app:layout_constraintTop_toBottomOf="@id/movie_poster_image" />
 
@@ -40,10 +43,9 @@
                 android:id="@+id/movie_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/between_element_margin"
-                android:layout_marginTop="@dimen/between_element_margin"
                 android:hint="release date"
-                android:paddingStart="@dimen/between_element_margin"
+                android:paddingBottom="@dimen/between_elements"
+                android:paddingStart="@dimen/between_elements"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/movie_details_size"
                 app:layout_constraintTop_toBottomOf="@id/movie_title" />
@@ -52,9 +54,8 @@
                 android:id="@+id/movie_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/between_element_margin"
-                android:layout_marginTop="@dimen/between_element_margin"
                 android:hint="rate"
+                android:paddingEnd="@dimen/between_elements"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/movie_details_size"
                 app:layout_constraintRight_toRightOf="@id/movie_poster_image"

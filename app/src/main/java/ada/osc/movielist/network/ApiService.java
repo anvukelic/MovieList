@@ -1,10 +1,13 @@
 package ada.osc.movielist.network;
 
+import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.MovieResponse;
+import ada.osc.movielist.model.MovieVideosResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -14,8 +17,16 @@ public interface ApiService {
 
     @GET("/3/movie/popular?")
     Call<MovieResponse> getPopularMovies(@Query("api_key") String api_key, @Query("page") int page);
+
     @GET("/3/movie/top_rated?")
     Call<MovieResponse> getTopRatedMovies(@Query("api_key") String api_key, @Query("page") int page);
+
     @GET("/3/movie/upcoming?")
     Call<MovieResponse> getUpcomingMovies(@Query("api_key") String api_key, @Query("page") int page);
+
+    @GET("/3/movie/{movie_id}?")
+    Call<MovieDetailsResponse> getMovieDetails(@Path("movie_id") int movieId, @Query("api_key") String api_key);
+
+    @GET("/3/movie/{movie_id}/videos?")
+    Call<MovieVideosResponse> getMovieTrailers(@Path("movie_id") int movieId, @Query("api_key") String api_key);
 }

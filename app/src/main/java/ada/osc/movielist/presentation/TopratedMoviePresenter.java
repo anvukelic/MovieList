@@ -27,16 +27,58 @@ public class TopratedMoviePresenter implements TopratedMovieContract.Presenter {
 
     @Override
     public void getTopRatedMovies(int page) {
-        apiInteractor.getTopRatedMovies(page, getPopularMoviesCallback());
+        apiInteractor.getTopRatedMovies(page, getTopRatedMoviesCallback());
     }
 
-    public Callback<MovieResponse> getPopularMoviesCallback() {
+    @Override
+    public void getTopRatedMoviesNextPage(int page) {
+        apiInteractor.getTopRatedMovies(page, getTopRatedMoviesNextPageCallback());
+    }
+
+    @Override
+    public void refreshTopRatedMovies() {
+        apiInteractor.getTopRatedMovies(1, getRefreshTopRatedMoviesCallback());
+    }
+
+    public Callback<MovieResponse> getTopRatedMoviesCallback() {
         return new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     MovieResponse movieResponse = response.body();
                     movieView.displayMovies(movieResponse.getMovies());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            }
+        };
+    }
+
+    public Callback<MovieResponse> getTopRatedMoviesNextPageCallback() {
+        return new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MovieResponse movieResponse = response.body();
+                    movieView.addMovies(movieResponse.getMovies());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            }
+        };
+    }
+
+    public Callback<MovieResponse> getRefreshTopRatedMoviesCallback() {
+        return new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MovieResponse movieResponse = response.body();
+                    movieView.refreshRecycler(movieResponse.getMovies());
                 }
             }
 

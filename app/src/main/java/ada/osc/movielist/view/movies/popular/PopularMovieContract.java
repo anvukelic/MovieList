@@ -9,13 +9,21 @@ import ada.osc.movielist.model.Movie;
  */
 public interface PopularMovieContract {
 
-    interface View{
+    interface View {
         void displayMovies(List<Movie> movieList);
+
+        void addMovies(List<Movie> movieList);
+
+        void refreshRecycler(List<Movie> movieList);
     }
 
-    interface Presenter{
+    interface Presenter {
         void setView(PopularMovieContract.View view);
 
         void getPopularMovies(int page);
+
+        void getPopularMoviesNextPage(int page);
+
+        void refreshPopularMovies();
     }
 }

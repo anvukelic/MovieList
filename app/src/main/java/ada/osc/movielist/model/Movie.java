@@ -10,7 +10,7 @@ public class Movie {
 
     @Expose
     @SerializedName("id")
-    private String id;
+    private int id;
     @Expose
     @SerializedName("title")
     private String title;
@@ -24,7 +24,7 @@ public class Movie {
     @SerializedName("release_date")
     private String release_date;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

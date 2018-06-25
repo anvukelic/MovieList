@@ -2,7 +2,9 @@ package ada.osc.movielist.interaction;
 
 import ada.osc.movielist.App;
 import ada.osc.movielist.Consts;
+import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.MovieResponse;
+import ada.osc.movielist.model.MovieVideosResponse;
 import retrofit2.Callback;
 
 /**
@@ -22,5 +24,16 @@ public class ApiInteractorImpl implements ApiInteractor {
     @Override
     public void getUpcomingMovies(int page, Callback<MovieResponse> callback) {
         App.getApiService().getUpcomingMovies(Consts.API_KEY,page).enqueue(callback);
+    }
+
+    @Override
+    public void getMovieDetails(int movieId, Callback<MovieDetailsResponse> callback) {
+        App.getApiService().getMovieDetails(movieId,Consts.API_KEY).enqueue(callback);
+    }
+
+    @Override
+    public void getMovieTrailers(int movieId, Callback<MovieVideosResponse> callback) {
+        App.getApiService().getMovieTrailers(movieId,Consts.API_KEY).enqueue(callback);
+
     }
 }

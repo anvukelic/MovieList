@@ -30,6 +30,17 @@ public class PopularMoviePresenter implements PopularMovieContract.Presenter {
         apiInteractor.getPopularMovies(page, getPopularMoviesCallback());
     }
 
+    @Override
+    public void getPopularMoviesNextPage(int page) {
+        apiInteractor.getPopularMovies(page, getPopularMoviesNextPageCallback());
+    }
+
+    @Override
+    public void refreshPopularMovies() {
+        apiInteractor.getPopularMovies(1, getRefreshPopularMoviesCallback());
+    }
+
+
     public Callback<MovieResponse> getPopularMoviesCallback() {
         return new Callback<MovieResponse>() {
             @Override
@@ -37,6 +48,38 @@ public class PopularMoviePresenter implements PopularMovieContract.Presenter {
                 if (response.isSuccessful() && response.body() != null) {
                     MovieResponse movieResponse = response.body();
                     movieView.displayMovies(movieResponse.getMovies());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            }
+        };
+    }
+
+    public Callback<MovieResponse> getPopularMoviesNextPageCallback() {
+        return new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MovieResponse movieResponse = response.body();
+                    movieView.addMovies(movieResponse.getMovies());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            }
+        };
+    }
+
+    public Callback<MovieResponse> getRefreshPopularMoviesCallback() {
+        return new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MovieResponse movieResponse = response.body();
+                    movieView.refreshRecycler(movieResponse.getMovies());
                 }
             }
 

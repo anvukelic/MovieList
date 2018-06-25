@@ -7,5 +7,7 @@ public class Consts {
 
     public static final String API_KEY = "6676761d0c04134d23f57e187fa73601";
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
-
+    public static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
+    public static final int PAGE_SIZE = 20;
+    public static final String MOVIE_ID = "movieId";
 }
