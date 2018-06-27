@@ -7,4 +7,5 @@
     <string name="category_toprated">Top rated</string>
     <string name="category_popular">Popular</string>
     <string name="title_activity_movie_details">MovieDetailsActivity</string>
+    <string name="log_out">Log out</string>
 </resources>

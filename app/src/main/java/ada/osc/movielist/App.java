@@ -29,6 +29,7 @@ public class App extends Application {
         retrofit = RetrofitUtil.createRetrofit();
         apiService = retrofit.create(ApiService.class);
 
+
     }
 
     public static ApiService getApiService() {

@@ -10,4 +10,7 @@ public class Consts {
     public static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
     public static final int PAGE_SIZE = 20;
     public static final String MOVIE_ID = "movieId";
+    public static final String SP_NAME = "movieListSharedPrefs";
+    public static final String USERNAME_PREF = "username";
+    public static final String EMAIL_PREF = "email";
 }
