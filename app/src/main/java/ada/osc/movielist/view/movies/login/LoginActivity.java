@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void updateUi(FirebaseUser user) {
         if (user != null) {
-            SharedPrefUtil.saveToSharedPref(this, Consts.SP_NAME, Consts.USERNAME_PREF, user.getDisplayName());
+            SharedPrefUtil.saveToSharedPref(this, Consts.SP_NAME, Consts.USER_ID_PREF, user.getUid());
             SharedPrefUtil.saveToSharedPref(this, Consts.SP_NAME, Consts.EMAIL_PREF, user.getEmail());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

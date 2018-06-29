@@ -11,6 +11,7 @@ public class Consts {
     public static final int PAGE_SIZE = 20;
     public static final String MOVIE_ID = "movieId";
     public static final String SP_NAME = "movieListSharedPrefs";
-    public static final String USERNAME_PREF = "username";
+    public static final String USER_ID_PREF = "userId";
     public static final String EMAIL_PREF = "email";
+    public static final String FAVORITE_MOVIES_REF = "fav_movies";
 }

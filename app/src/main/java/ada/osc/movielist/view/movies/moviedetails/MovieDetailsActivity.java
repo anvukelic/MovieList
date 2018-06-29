@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import java.util.List;
 import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Genre;
+import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.Video;
 import ada.osc.movielist.presentation.MovieDetailsPresenter;
 import ada.osc.movielist.view.movies.ItemClickListener;
@@ -57,18 +60,50 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     GenreAdapter genreAdapter;
     VideoAdapter videoAdapter;
 
+    private MovieDetailsResponse movie;
+
+    Menu menu;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
-        presenter = new MovieDetailsPresenter();
+        presenter = new MovieDetailsPresenter(this);
         presenter.setView(this);
         if (getIntent().getExtras() != null) {
-            presenter.getMovieDetails(getIntent().getIntExtra(Consts.MOVIE_ID, 0));
-            presenter.getMovieTrailers(getIntent().getIntExtra(Consts.MOVIE_ID, 0));
+            int movieId = getIntent().getIntExtra(Consts.MOVIE_ID, 0);
+            presenter.getMovieDetails(movieId);
+            presenter.getMovieTrailers(movieId);
+            presenter.checkIfMovieIsFaved(movieId);
         } else {
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_details_menu, menu);
+        this.menu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.fave_movie:
+                presenter.faveMovie(movie);
+                item.setVisible(false);
+                menu.findItem(R.id.unfave_movie).setVisible(true);
+                return true;
+            case R.id.unfave_movie:
+                presenter.unfaveMovie(movie);
+                item.setVisible(false);
+                menu.findItem(R.id.fave_movie).setVisible(true);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -139,6 +174,19 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     public void removeProgressBar() {
         progressBar.setVisibility(View.GONE);
         container.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void saveMovie(MovieDetailsResponse movie) {
+        this.movie = movie;
+    }
+
+    @Override
+    public void changeFavItemIcon(boolean isFaved) {
+        if(!isFaved){
+            menu.findItem(R.id.fave_movie).setVisible(false);
+            menu.findItem(R.id.unfave_movie).setVisible(true);
+        }
     }
 
     @Override

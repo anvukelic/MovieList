@@ -1,13 +1,25 @@
 package ada.osc.movielist.presentation;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import ada.osc.movielist.Consts;
 import ada.osc.movielist.interaction.ApiInteractor;
 import ada.osc.movielist.interaction.ApiInteractorImpl;
 import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.MovieVideosResponse;
 import ada.osc.movielist.model.Video;
+import ada.osc.movielist.utils.SharedPrefUtil;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsContract;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,8 +33,13 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
     private final ApiInteractor apiInteractor;
     private MovieDetailsContract.View movieView;
 
-    public MovieDetailsPresenter() {
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+
+    public MovieDetailsPresenter(Context context) {
         apiInteractor = new ApiInteractorImpl();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(SharedPrefUtil.getStringFromSharedPref(context,Consts.SP_NAME,Consts.USER_ID_PREF));
     }
 
     @Override
@@ -40,6 +57,29 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
         apiInteractor.getMovieTrailers(movieId, getMovieTrailersCallback());
     }
 
+    @Override
+    public void faveMovie(MovieDetailsResponse movie) {
+        myRef.child(String.valueOf(movie.getId())).setValue(movie);
+    }
+
+    @Override
+    public void unfaveMovie(MovieDetailsResponse movie) {
+        myRef.child(String.valueOf(movie.getId())).removeValue();
+    }
+
+    @Override
+    public void checkIfMovieIsFaved(int movieId) {
+       myRef.child(String.valueOf(movieId)).addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               movieView.changeFavItemIcon(dataSnapshot.getValue(MovieDetailsResponse.class)==null);
+           }
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+           }
+       });
+    }
+
     private Callback<MovieDetailsResponse> getMovieDetailsCallback() {
         return new Callback<MovieDetailsResponse>() {
             @Override
@@ -54,6 +94,7 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
                     movieView.showGenres(details.getGenres());
                     movieView.showReleaseDate(details.getReleaseDate());
                     movieView.removeProgressBar();
+                    movieView.saveMovie(details);
                 } else {
                 }
             }
@@ -85,4 +126,4 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
             }
         };
     }
-}
+    }

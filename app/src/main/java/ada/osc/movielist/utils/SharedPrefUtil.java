@@ -23,6 +23,6 @@ public class SharedPrefUtil {
     public static void clearLoginPrefs(Context context, String sharedPrefsName) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE);
         sharedPreferences.edit().remove(Consts.EMAIL_PREF).apply();
-        sharedPreferences.edit().remove(Consts.USERNAME_PREF).apply();
+        sharedPreferences.edit().remove(Consts.USER_ID_PREF).apply();
     }
 }

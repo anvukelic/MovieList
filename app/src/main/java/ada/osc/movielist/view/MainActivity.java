@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         }
     }
 
-
     @Override
     public void goToLogin() {
         SharedPrefUtil.clearLoginPrefs(this, Consts.SP_NAME);
