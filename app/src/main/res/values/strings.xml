@@ -8,4 +8,6 @@
     <string name="category_popular">Popular</string>
     <string name="title_activity_movie_details">MovieDetailsActivity</string>
     <string name="log_out">Log out</string>
+    <string name="category_favorite">Favorite</string>
+    <string name="no_faved_movies">You have no faved movies</string>
 </resources>

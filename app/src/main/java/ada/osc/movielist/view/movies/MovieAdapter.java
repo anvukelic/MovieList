@@ -35,13 +35,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         this.context = context;
     }
 
-    public void refreshData(List<Movie> movieList){
+    public void refreshData(List<Movie> movieList) {
         movies.clear();
         movies.addAll(movieList);
         notifyDataSetChanged();
     }
 
-    public void addMovies(List<Movie> movies){
+    public void addMovies(List<Movie> movies) {
         this.movies.addAll(movies);
         notifyDataSetChanged();
     }
@@ -58,7 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Movie movie = movies.get(position);
         holder.title.setText(movie.getTitle());
-        holder.release_date.setText(movie.getRelease_date());
+        holder.release_date.setText(movie.getReleaseDate());
         holder.rate.setText(String.valueOf(movie.getRate()));
         StringBuilder url = new StringBuilder();
         url.append(Consts.IMAGE_BASE_URL);
@@ -66,11 +66,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         Glide.with(context).load(url.toString()).into(holder.poster);
     }
 
-    public Movie getMovie(int position){
+    public Movie getMovie(int position) {
         return movies.get(position);
     }
-    public int getMovieId(int position){
+
+    public int getMovieId(int position) {
         return movies.get(position).getId();
+    }
+
+    public void clearMovies() {
+        movies.clear();
+        notifyDataSetChanged();
     }
 
     @Override

@@ -22,10 +22,25 @@ public class Movie {
     private String posterPath;
     @Expose
     @SerializedName("release_date")
-    private String release_date;
+    private String releaseDate;
+
+    public Movie() {
+    }
+
+    public Movie(int id, String title, double rate, String posterPath, String releaseDate) {
+        this.id = id;
+        this.title = title;
+        this.rate = rate;
+        this.posterPath = posterPath;
+        this.releaseDate = releaseDate;
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -52,11 +67,11 @@ public class Movie {
         this.posterPath = posterPath;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }

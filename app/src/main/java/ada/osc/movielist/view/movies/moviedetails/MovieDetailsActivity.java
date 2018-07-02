@@ -64,7 +64,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
 
     Menu menu;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,16 +76,23 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
             int movieId = getIntent().getIntExtra(Consts.MOVIE_ID, 0);
             presenter.getMovieDetails(movieId);
             presenter.getMovieTrailers(movieId);
-            presenter.checkIfMovieIsFaved(movieId);
         } else {
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.movie_details_menu, menu);
         this.menu = menu;
+        presenter.checkIfMovieIsFaved(getIntent().getIntExtra(Consts.MOVIE_ID, 0));
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -183,7 +189,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
 
     @Override
     public void changeFavItemIcon(boolean isFaved) {
-        if(!isFaved){
+        if (!isFaved ) {
             menu.findItem(R.id.fave_movie).setVisible(false);
             menu.findItem(R.id.unfave_movie).setVisible(true);
         }

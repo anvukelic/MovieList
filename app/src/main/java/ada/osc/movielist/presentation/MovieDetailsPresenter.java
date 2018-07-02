@@ -3,7 +3,6 @@ package ada.osc.movielist.presentation;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,12 +33,12 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
     private MovieDetailsContract.View movieView;
 
     FirebaseDatabase database;
-    DatabaseReference myRef;
+    DatabaseReference dbRef;
 
     public MovieDetailsPresenter(Context context) {
         apiInteractor = new ApiInteractorImpl();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(SharedPrefUtil.getStringFromSharedPref(context,Consts.SP_NAME,Consts.USER_ID_PREF));
+        dbRef = database.getReference(SharedPrefUtil.getStringFromSharedPref(context,Consts.SP_NAME,Consts.USER_ID_PREF));
     }
 
     @Override
@@ -59,17 +58,17 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
 
     @Override
     public void faveMovie(MovieDetailsResponse movie) {
-        myRef.child(String.valueOf(movie.getId())).setValue(movie);
+        dbRef.child("favorite").child(String.valueOf(movie.getId())).setValue(movie);
     }
 
     @Override
     public void unfaveMovie(MovieDetailsResponse movie) {
-        myRef.child(String.valueOf(movie.getId())).removeValue();
+        dbRef.child("favorite").child(String.valueOf(movie.getId())).removeValue();
     }
 
     @Override
     public void checkIfMovieIsFaved(int movieId) {
-       myRef.child(String.valueOf(movieId)).addListenerForSingleValueEvent(new ValueEventListener() {
+       dbRef.child("favorite").child(String.valueOf(movieId)).addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                movieView.changeFavItemIcon(dataSnapshot.getValue(MovieDetailsResponse.class)==null);

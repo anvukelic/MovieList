@@ -29,6 +29,9 @@ public class MovieDetailsResponse {
     @SerializedName("backdrop_path")
     private String imagePath;
     @Expose
+    @SerializedName("poster_path")
+    private String poster;
+    @Expose
     @SerializedName("genres")
     private List<Genre> genres;
     @Expose
@@ -37,6 +40,9 @@ public class MovieDetailsResponse {
     @Expose
     @SerializedName("release_date")
     private String releaseDate;
+    @Expose
+    @SerializedName("vote_average")
+    private double rate;
 
     public int getId() {
         return id;
@@ -108,5 +114,21 @@ public class MovieDetailsResponse {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }

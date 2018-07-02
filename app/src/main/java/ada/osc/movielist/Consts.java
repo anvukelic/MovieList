@@ -14,4 +14,5 @@ public class Consts {
     public static final String USER_ID_PREF = "userId";
     public static final String EMAIL_PREF = "email";
     public static final String FAVORITE_MOVIES_REF = "fav_movies";
+    public static final String FIREBASE_FAVORITE_CHILD = "favorite";
 }

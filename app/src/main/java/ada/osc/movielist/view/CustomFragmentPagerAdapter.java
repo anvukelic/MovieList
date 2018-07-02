@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ada.osc.movielist.R;
+import ada.osc.movielist.view.movies.favorite.FavoriteMoviesFragment;
 import ada.osc.movielist.view.movies.popular.PopularMoviesFragment;
 import ada.osc.movielist.view.movies.toprated.TopratedMoviesFragment;
 import ada.osc.movielist.view.movies.upcoming.UpcomingMoviesFragment;
@@ -31,6 +32,8 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
                 return new TopratedMoviesFragment();
             case 2:
                 return new UpcomingMoviesFragment();
+            case 3:
+                return new FavoriteMoviesFragment();
             default:
                 return null;
         }
@@ -38,7 +41,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     // This determines the title for each tab
@@ -52,6 +55,8 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
                 return context.getString(R.string.category_toprated);
             case 2:
                 return context.getString(R.string.category_upcoming);
+            case 3:
+                return context.getString(R.string.category_favorite);
             default:
                 return null;
         }
