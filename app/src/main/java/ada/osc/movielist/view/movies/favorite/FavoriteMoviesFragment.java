@@ -44,7 +44,7 @@ public class FavoriteMoviesFragment extends Fragment implements ItemClickListene
     RecyclerView rvMovies;
     @BindView(R.id.progressbar_favorite_movies)
     ProgressBar progressBar;
-    @BindView(R.id.empty_screen_searched)
+    @BindView(R.id.empty_screen_favorite)
     FrameLayout emptyScreen;
 
     MovieAdapter adapter;
