@@ -29,4 +29,7 @@ public interface ApiService {
 
     @GET("/3/movie/{movie_id}/videos?")
     Call<MovieVideosResponse> getMovieTrailers(@Path("movie_id") int movieId, @Query("api_key") String api_key);
+
+    @GET("/3/search/movie?")
+    Call<MovieResponse> getSearchedMovies(@Query("api_key") String api_key, @Query("query") String query, @Query("page") int page);
 }

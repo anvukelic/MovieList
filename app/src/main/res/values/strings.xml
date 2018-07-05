@@ -10,4 +10,6 @@
     <string name="log_out">Log out</string>
     <string name="category_favorite">Favorite</string>
     <string name="no_faved_movies">You have no faved movies</string>
+    <string name="search_hint">Search</string>
+    <string name="no_movies_found">No movies found with your query</string>
 </resources>

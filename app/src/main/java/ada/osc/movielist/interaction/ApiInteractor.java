@@ -11,8 +11,14 @@ import retrofit2.Callback;
 public interface ApiInteractor {
 
     void getPopularMovies(int page, Callback<MovieResponse> callback);
+
     void getTopRatedMovies(int page, Callback<MovieResponse> callback);
+
     void getUpcomingMovies(int page, Callback<MovieResponse> callback);
+
+    void getSearchedMovies(String query, int page, Callback<MovieResponse> callback);
+
     void getMovieDetails(int movieId, Callback<MovieDetailsResponse> callback);
+
     void getMovieTrailers(int movieId, Callback<MovieVideosResponse> callback);
 }

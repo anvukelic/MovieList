@@ -13,27 +13,33 @@ import retrofit2.Callback;
 public class ApiInteractorImpl implements ApiInteractor {
     @Override
     public void getPopularMovies(int page, Callback<MovieResponse> callback) {
-        App.getApiService().getPopularMovies(Consts.API_KEY,page).enqueue(callback);
+        App.getApiService().getPopularMovies(Consts.API_KEY, page).enqueue(callback);
     }
 
     @Override
     public void getTopRatedMovies(int page, Callback<MovieResponse> callback) {
-        App.getApiService().getTopRatedMovies(Consts.API_KEY,page).enqueue(callback);
+        App.getApiService().getTopRatedMovies(Consts.API_KEY, page).enqueue(callback);
     }
 
     @Override
     public void getUpcomingMovies(int page, Callback<MovieResponse> callback) {
-        App.getApiService().getUpcomingMovies(Consts.API_KEY,page).enqueue(callback);
+        App.getApiService().getUpcomingMovies(Consts.API_KEY, page).enqueue(callback);
+    }
+
+    @Override
+    public void getSearchedMovies(String query, int page, Callback<MovieResponse> callback) {
+        App.getApiService().getSearchedMovies(Consts.API_KEY, query, page).enqueue(callback);
     }
 
     @Override
     public void getMovieDetails(int movieId, Callback<MovieDetailsResponse> callback) {
-        App.getApiService().getMovieDetails(movieId,Consts.API_KEY).enqueue(callback);
+        App.getApiService().getMovieDetails(movieId, Consts.API_KEY).enqueue(callback);
     }
 
     @Override
     public void getMovieTrailers(int movieId, Callback<MovieVideosResponse> callback) {
-        App.getApiService().getMovieTrailers(movieId,Consts.API_KEY).enqueue(callback);
-
+        App.getApiService().getMovieTrailers(movieId, Consts.API_KEY).enqueue(callback);
     }
+
+
 }
