@@ -11,7 +11,6 @@ import java.util.List;
 
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Video;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,9 +21,9 @@ import butterknife.OnClick;
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder> {
 
     private List<Video> videos;
-    private ItemClickListener listener;
+    private VideoClickListener listener;
 
-    public VideoAdapter(ItemClickListener listener, List<Video> videos) {
+    public VideoAdapter(VideoClickListener listener, List<Video> videos) {
         this.listener = listener;
         this.videos = videos;
     }
@@ -64,9 +63,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
         @OnClick
         public void onItemClick(View view) {
             if (listener != null) {
-                listener.onItemClick(view, getAdapterPosition());
+                listener.onVideoClick(view, getAdapterPosition());
             }
         }
+    }
+
+    public interface VideoClickListener {
+        void onVideoClick(View view, int position);
     }
 
 

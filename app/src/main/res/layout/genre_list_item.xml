@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textview_genre_item_title"
+        android:id="@+id/genre_title"
         android:layout_width="wrap_content"
         android:textSize="@dimen/movie_details_size"
         android:textColor="@color/colorPrimaryDark"

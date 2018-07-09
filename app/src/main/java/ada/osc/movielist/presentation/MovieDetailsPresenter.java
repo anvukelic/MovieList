@@ -15,8 +15,10 @@ import java.util.List;
 import ada.osc.movielist.Consts;
 import ada.osc.movielist.interaction.ApiInteractor;
 import ada.osc.movielist.interaction.ApiInteractorImpl;
+import ada.osc.movielist.model.Credit;
+import ada.osc.movielist.model.CreditsResponse;
 import ada.osc.movielist.model.MovieDetailsResponse;
-import ada.osc.movielist.model.MovieVideosResponse;
+import ada.osc.movielist.model.VideosResponse;
 import ada.osc.movielist.model.Video;
 import ada.osc.movielist.utils.SharedPrefUtil;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsContract;
@@ -54,6 +56,11 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
     @Override
     public void getMovieTrailers(int movieId) {
         apiInteractor.getMovieTrailers(movieId, getMovieTrailersCallback());
+    }
+
+    @Override
+    public void getMovieCredits(int movieId) {
+        apiInteractor.getMovieCredits(movieId, getMovieCreditsCallback());
     }
 
     @Override
@@ -105,10 +112,10 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
         };
     }
 
-    public Callback<MovieVideosResponse> getMovieTrailersCallback() {
-        return new Callback<MovieVideosResponse>() {
+    public Callback<VideosResponse> getMovieTrailersCallback() {
+        return new Callback<VideosResponse>() {
             @Override
-            public void onResponse(Call<MovieVideosResponse> call, Response<MovieVideosResponse> response) {
+            public void onResponse(Call<VideosResponse> call, Response<VideosResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Video> videoList = new ArrayList<>();
                     for (Video video : response.body().getVideos()) {
@@ -121,8 +128,30 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
             }
 
             @Override
-            public void onFailure(Call<MovieVideosResponse> call, Throwable t) {
+            public void onFailure(Call<VideosResponse> call, Throwable t) {
             }
         };
     }
+
+    public Callback<CreditsResponse> getMovieCreditsCallback() {
+        return new Callback<CreditsResponse>() {
+            @Override
+            public void onResponse(Call<CreditsResponse> call, Response<CreditsResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Credit> creditList = new ArrayList<>();
+                    for (Credit credit: response.body().getCredits()) {
+                        if (credit.getCharacter()!=null) {
+                            creditList.add(credit);
+                        }
+                    }
+                    movieView.showCredits(creditList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreditsResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        };
     }
+}

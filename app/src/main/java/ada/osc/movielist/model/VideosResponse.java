@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by avukelic on 25-Jun-18.
  */
-public class MovieVideosResponse {
+public class VideosResponse {
     @Expose
     @SerializedName("results")
     private List<Video> videos;

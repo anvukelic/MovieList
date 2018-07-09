@@ -1,9 +1,11 @@
 package ada.osc.movielist.view.movies.moviedetails;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -21,15 +23,15 @@ import java.util.List;
 
 import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
+import ada.osc.movielist.model.Credit;
 import ada.osc.movielist.model.Genre;
 import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.Video;
 import ada.osc.movielist.presentation.MovieDetailsPresenter;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View, ItemClickListener {
+public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsContract.View, VideoAdapter.VideoClickListener, CreditAdapter.CreditClickListener {
 
     private MovieDetailsContract.Presenter presenter;
 
@@ -41,8 +43,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     TextView movieOriginalTitle;
     @BindView(R.id.textview_movie_details_runtime)
     TextView movieRuntime;
-    @BindView(R.id.recycler_movie_details_genres)
-    RecyclerView movieGenres;
     @BindView(R.id.textview_movie_details_overview)
     TextView movieOverview;
     @BindView(R.id.textview_movie_details_release_date)
@@ -52,13 +52,18 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     ProgressBar progressBar;
     @BindView(R.id.movie_details_container)
     LinearLayout container;
+    @BindView(R.id.recycler_movie_details_genres)
+    RecyclerView movieGenres;
     @BindView(R.id.recycler_movie_details_trailers)
     RecyclerView movieTrailerLinks;
+    @BindView(R.id.recycler_movie_details_credits)
+    RecyclerView movieCredits;
     @BindView(R.id.movie_details_trailers_divider)
     TextView linksDivider;
 
     GenreAdapter genreAdapter;
     VideoAdapter videoAdapter;
+    CreditAdapter creditAdapter;
 
     private MovieDetailsResponse movie;
 
@@ -69,6 +74,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.movie_details_title));
         ButterKnife.bind(this);
         presenter = new MovieDetailsPresenter(this);
         presenter.setView(this);
@@ -76,7 +82,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
             int movieId = getIntent().getIntExtra(Consts.MOVIE_ID, 0);
             presenter.getMovieDetails(movieId);
             presenter.getMovieTrailers(movieId);
-        } else {
+            presenter.getMovieCredits(movieId);
         }
     }
 
@@ -102,6 +108,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
                 item.setVisible(false);
                 menu.findItem(R.id.fave_movie).setVisible(true);
                 return true;
+            case R.id.share_movie:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.check_this_link) + "https://www.imdb.com/title/" + movie.getImdb_id());
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -166,6 +178,15 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     }
 
     @Override
+    public void showCredits(List<Credit> credits) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        creditAdapter = new CreditAdapter(this, credits,this);
+        movieCredits.setItemAnimator(new DefaultItemAnimator());
+        movieCredits.setLayoutManager(layoutManager);
+        movieCredits.setAdapter(creditAdapter);
+    }
+
+    @Override
     public void showReleaseDate(String releaseDate) {
         movieReleaseDate.setText(releaseDate);
     }
@@ -190,11 +211,15 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onVideoClick(View view, int position) {
         WebView webView = new WebView(this);
         StringBuilder sb = new StringBuilder();
         sb.append(Consts.YOUTUBE_BASE_URL);
         sb.append(videoAdapter.getKey(position));
         webView.loadUrl(sb.toString());
+    }
+
+    @Override
+    public void onCreditClick(View view, int position) {
     }
 }

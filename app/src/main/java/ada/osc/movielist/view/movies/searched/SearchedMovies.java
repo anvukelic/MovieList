@@ -15,14 +15,13 @@ import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Movie;
 import ada.osc.movielist.presentation.SearchedMoviePresenter;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import ada.osc.movielist.view.movies.MovieAdapter;
 import ada.osc.movielist.view.movies.PaginationScrollListener;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchedMovies extends AppCompatActivity implements ItemClickListener, SearchedMoviesContract.View{
+public class SearchedMovies extends AppCompatActivity implements MovieAdapter.MovieClickAdapter, SearchedMoviesContract.View{
 
     private MovieAdapter adapter;
     @BindView(R.id.recycler_searched_movies)
@@ -96,7 +95,7 @@ public class SearchedMovies extends AppCompatActivity implements ItemClickListen
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onMovieClick(View view, int position) {
         showMovieDetails(adapter.getMovieId(position));
     }
 

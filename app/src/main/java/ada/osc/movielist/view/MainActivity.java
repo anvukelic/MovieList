@@ -1,22 +1,38 @@
 package ada.osc.movielist.view;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import ada.osc.movielist.App;
 import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
+import ada.osc.movielist.interaction.ApiInteractorImpl;
+import ada.osc.movielist.model.RequestToken;
+import ada.osc.movielist.model.Session;
 import ada.osc.movielist.presentation.MainPresenter;
 import ada.osc.movielist.utils.SharedPrefUtil;
 import ada.osc.movielist.view.movies.login.LoginActivity;
 import ada.osc.movielist.view.movies.searched.SearchedMovies;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 

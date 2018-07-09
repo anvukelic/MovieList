@@ -7,13 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Genre;
-import ada.osc.movielist.view.movies.MovieAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -53,7 +50,7 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textview_genre_item_title)
+        @BindView(R.id.genre_title)
         TextView title;
 
         public MyViewHolder(View itemView) {

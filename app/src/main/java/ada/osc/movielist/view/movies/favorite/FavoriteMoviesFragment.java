@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +20,7 @@ import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Movie;
 import ada.osc.movielist.presentation.FavoriteMoviePresenter;
-import ada.osc.movielist.presentation.PopularMoviePresenter;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import ada.osc.movielist.view.movies.MovieAdapter;
-import ada.osc.movielist.view.movies.PaginationScrollListener;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteMoviesFragment extends Fragment implements ItemClickListener, FavoriteMovieContract.View {
+public class FavoriteMoviesFragment extends Fragment implements MovieAdapter.MovieClickAdapter, FavoriteMovieContract.View {
 
 
     public FavoriteMoviesFragment() {
@@ -76,7 +71,7 @@ public class FavoriteMoviesFragment extends Fragment implements ItemClickListene
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onMovieClick(View view, int position) {
         showMovieDetails(adapter.getMovieId(position));
     }
 

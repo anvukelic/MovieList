@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie List</string>
+    <string name="no_faved_movies">Nemate favoriziranih filmova</string>
+    <string name="no_movies_found">Nije pronađen niti jedan film sa Vašim upitom</string>
+    <string name="check_this_link">"Pogledaj ovaj film - "</string>
+    <string name="action_log_out">Odjavi se</string>
+    <string name="action_share">Podjeli</string>
+    <string name="action_fave">Favoriziraj</string>
+    <string name="action_unfave">Odfavoriziraj</string>
+    <string name="action_search">Pronađi</string>
+    <string name="search_hint">Pronađi</string>
+    <string name="details">Detalji</string>
+    <string name="trailers">Traileri</string>
+    <string name="cast">Glumci</string>
+    <string name="category_upcoming" translatable="false">Uskoro</string>
+    <string name="category_toprated" translatable="false">Najbolji</string>
+    <string name="category_popular" translatable="false">Popularni</string>
+    <string name="category_favorite" translatable="false">Favoriti</string>
+</resources>

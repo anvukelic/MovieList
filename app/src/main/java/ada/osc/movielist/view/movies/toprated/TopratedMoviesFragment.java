@@ -19,7 +19,6 @@ import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Movie;
 import ada.osc.movielist.presentation.TopratedMoviePresenter;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import ada.osc.movielist.view.movies.MovieAdapter;
 import ada.osc.movielist.view.movies.PaginationScrollListener;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsActivity;
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopratedMoviesFragment extends Fragment implements ItemClickListener, TopratedMovieContract.View {
+public class TopratedMoviesFragment extends Fragment implements MovieAdapter.MovieClickAdapter, TopratedMovieContract.View {
 
 
     public TopratedMoviesFragment() {
@@ -43,7 +42,7 @@ public class TopratedMoviesFragment extends Fragment implements ItemClickListene
 
     @BindView(R.id.recycler_top_rated_movies)
     RecyclerView rvMovies;
-    @BindView(R.id.swipe_toprated_movies)
+    @BindView(R.id.swipe_top_rated_movies)
     SwipeRefreshLayout swipeRefreshLayout;
 
     MovieAdapter adapter;
@@ -103,7 +102,7 @@ public class TopratedMoviesFragment extends Fragment implements ItemClickListene
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onMovieClick(View view, int position) {
         showMovieDetails(adapter.getMovieId(position));
     }
 

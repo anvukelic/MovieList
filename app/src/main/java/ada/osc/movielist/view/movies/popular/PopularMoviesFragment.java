@@ -19,7 +19,6 @@ import ada.osc.movielist.Consts;
 import ada.osc.movielist.R;
 import ada.osc.movielist.model.Movie;
 import ada.osc.movielist.presentation.PopularMoviePresenter;
-import ada.osc.movielist.view.movies.ItemClickListener;
 import ada.osc.movielist.view.movies.MovieAdapter;
 import ada.osc.movielist.view.movies.PaginationScrollListener;
 import ada.osc.movielist.view.movies.moviedetails.MovieDetailsActivity;
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PopularMoviesFragment extends Fragment implements ItemClickListener, PopularMovieContract.View {
+public class PopularMoviesFragment extends Fragment implements MovieAdapter.MovieClickAdapter, PopularMovieContract.View {
 
 
     public PopularMoviesFragment() {
@@ -105,7 +104,7 @@ public class PopularMoviesFragment extends Fragment implements ItemClickListener
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onMovieClick(View view, int position) {
         showMovieDetails(adapter.getMovieId(position));
     }
 

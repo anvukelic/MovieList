@@ -2,13 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/fave_movie"
-        android:title="fave"
+    <item
+        android:id="@+id/share_movie"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/fave_movie"
         android:icon="@drawable/ic_favorite_border_black_24dp"
-        app:showAsAction="ifRoom"/>
-    <item android:id="@+id/unfave_movie"
-        android:title="unfave"
+        android:title="@string/action_fave"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/unfave_movie"
         android:icon="@drawable/ic_favorite_black_24dp"
-        app:showAsAction="ifRoom"
-        android:visible="false"/>
+        android:title="@string/action_unfave"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
 </menu>

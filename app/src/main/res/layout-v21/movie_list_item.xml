@@ -7,12 +7,12 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
+        android:id="@+id/card_view_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:elevation="3dp"
+        android:layout_margin="@dimen/cardview_margin"
+        android:elevation="@dimen/cardview_elevation"
         card_view:cardCornerRadius="4dp">
 
         <android.support.constraint.ConstraintLayout
@@ -22,9 +22,9 @@
             <ImageView
                 android:id="@+id/movie_poster_image"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/movie_image_height"
                 android:layout_gravity="center"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="@dimen/no_margin"
                 android:src="@drawable/no_image" />
 
             <TextView
@@ -32,7 +32,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:ellipsize="end"
-                android:hint="title"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/between_elements"
                 android:paddingStart="@dimen/between_elements"
@@ -43,7 +42,6 @@
                 android:id="@+id/movie_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="release date"
                 android:paddingBottom="@dimen/between_elements"
                 android:paddingStart="@dimen/between_elements"
                 android:textColor="@color/colorPrimary"
@@ -54,7 +52,6 @@
                 android:id="@+id/movie_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="rate"
                 android:paddingEnd="@dimen/between_elements"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/movie_details_size"

@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(LoginActivity.this, "Auth failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Google sign in failed", Toast.LENGTH_SHORT).show();
         }
     }
 

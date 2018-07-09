@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
+import ada.osc.movielist.model.Credit;
 import ada.osc.movielist.model.Genre;
 import ada.osc.movielist.model.Movie;
 import ada.osc.movielist.model.MovieDetailsResponse;
@@ -22,6 +23,7 @@ public interface MovieDetailsContract {
         void showRuntime(int runtime);
         void showGenres(List<Genre> genres);
         void showVideoLinks(List<Video> videos);
+        void showCredits(List<Credit> credits);
         void showReleaseDate(String releaseDate);
         void removeProgressBar();
         void saveMovie(MovieDetailsResponse movie);
@@ -32,6 +34,7 @@ public interface MovieDetailsContract {
         void setView(MovieDetailsContract.View view);
         void getMovieDetails(int movieId);
         void getMovieTrailers(int movieId);
+        void getMovieCredits(int movieId);
         void faveMovie(MovieDetailsResponse movie);
         void unfaveMovie(MovieDetailsResponse movie);
         void checkIfMovieIsFaved(int movieId);

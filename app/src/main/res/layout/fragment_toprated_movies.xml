@@ -7,7 +7,7 @@
 
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_toprated_movies"
+        android:id="@+id/swipe_top_rated_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

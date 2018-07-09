@@ -1,8 +1,11 @@
 package ada.osc.movielist.interaction;
 
+import ada.osc.movielist.model.CreditsResponse;
 import ada.osc.movielist.model.MovieDetailsResponse;
 import ada.osc.movielist.model.MovieResponse;
-import ada.osc.movielist.model.MovieVideosResponse;
+import ada.osc.movielist.model.RequestToken;
+import ada.osc.movielist.model.VideosResponse;
+import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
@@ -20,5 +23,9 @@ public interface ApiInteractor {
 
     void getMovieDetails(int movieId, Callback<MovieDetailsResponse> callback);
 
-    void getMovieTrailers(int movieId, Callback<MovieVideosResponse> callback);
+    void getMovieTrailers(int movieId, Callback<VideosResponse> callback);
+
+    void getMovieCredits(int movieId, Callback<CreditsResponse> callback);
+
+    void getToken(Callback<RequestToken> callback);
 }

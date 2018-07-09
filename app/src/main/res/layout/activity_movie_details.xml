@@ -20,6 +20,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
                 style="@style/details_divider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Details" />
+                android:text="@string/details" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                 style="@style/details_divider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trailers" />
+                android:text="@string/trailers" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -119,6 +120,27 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_movie_details_trailers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/between_elements"
+                    android:layout_marginTop="@dimen/between_elements" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/movie_details_credits_divider"
+                style="@style/details_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cast" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/between_elements">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_movie_details_credits"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/between_elements"
